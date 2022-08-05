@@ -1,13 +1,21 @@
 import { AppProps } from "next/app";
 import Head from "next/head";
 import { MantineProvider } from "@mantine/core";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import {
+  QueryClient,
+  QueryClientProvider,
+  Hydrate,
+} from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import { useState } from "react";
 
-// Create a client
-const queryClient = new QueryClient();
+// // Create a client
+// const queryClient = new QueryClient();
 
 export default function App(props: AppProps) {
+  // needed for hydration, as opposed to outside function
+  const [queryClient] = useState(() => new QueryClient());
+
   const { Component, pageProps } = props;
 
   return (
@@ -29,8 +37,10 @@ export default function App(props: AppProps) {
         }}
       >
         <QueryClientProvider client={queryClient}>
-          <Component {...pageProps} />
-          <ReactQueryDevtools initialIsOpen={false} />
+          <Hydrate state={pageProps.dehydratedState}>
+            <Component {...pageProps} />
+            <ReactQueryDevtools initialIsOpen={false} />
+          </Hydrate>
         </QueryClientProvider>
       </MantineProvider>
     </>

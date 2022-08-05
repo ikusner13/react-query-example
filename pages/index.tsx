@@ -1,4 +1,5 @@
 import { Alert, Badge, Button, Card, Stack, Text } from "@mantine/core";
+import { NextLink } from "@mantine/next";
 import type { NextPage } from "next";
 import PostCard from "../components/PostCard";
 import SkeletonCard from "../components/SkeletonCard";
@@ -25,6 +26,9 @@ const Home: NextPage = () => {
 
   return (
     <>
+      <Button component={NextLink} href="/ssr" ml="lg" my="lg">
+        SSR query
+      </Button>
       <Stack>
         {postsQuery.data.map((post) => (
           <PostCard key={post.id} post={post} />
