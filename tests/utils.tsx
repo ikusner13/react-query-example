@@ -57,7 +57,7 @@ const createTestQueryClient = () =>
     logger: {
       log: console.log,
       warn: console.warn,
-      error: console.error, // or () => {} to mute
+      error: () => {},
     },
   });
 
