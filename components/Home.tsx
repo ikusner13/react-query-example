@@ -29,6 +29,8 @@ const Home = () => {
       <Button component={NextLink} href="/ssr" ml="lg" my="lg">
         SSR query
       </Button>
+      <span>{addPost.isSuccess && "post added"}</span>
+      <span>{addPost.isError && "could not add post"}</span>
       <Stack>
         {postsQuery.data.map((post) => (
           <PostCard key={post.id} post={post} />

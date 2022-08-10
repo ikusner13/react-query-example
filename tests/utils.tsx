@@ -36,6 +36,15 @@ export const handlers = [
       ])
     );
   }),
+  rest.post("/api/posts", (req, res, ctx) => {
+    return res(
+      ctx.status(200),
+      ctx.json({
+        id: 4,
+        content: "test",
+      })
+    );
+  }),
 ];
 
 const createTestQueryClient = () =>
@@ -48,7 +57,7 @@ const createTestQueryClient = () =>
     logger: {
       log: console.log,
       warn: console.warn,
-      error: console.error,
+      error: console.error, // or () => {} to mute
     },
   });
 
